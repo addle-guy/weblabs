@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - My Django Application</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">
+                    <img class="logo" src="{% static 'app/content/logo.png' %}" alt="logo" /> 
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'home' %}">Домой</a></li>
+                    <li><a href="{% url 'about' %}">О нас</a></li>
+                    <li><a href="{% url 'contact' %}">Контакты</a></li>
+                    <li><a href="{% url 'anketa' %}">Анкета</a></li>
+                    <li><a href="{% url 'blog' %}">Блог</a></li>
+                    <li><a href="{% url 'videopost' %}">Видео</a></li>
+                    <li><a href="{% url 'links' %}">Полезные ссылки</a></li>
+                    {% if user.is_superuser %}
+                    <li><a href="{% url 'newpost' %}">Добавление статьи</a></li>
+                    {% endif %}
+                    {% if not user.is_authenticated %}
+                    <li><a href="{% url 'registration' %}">Регистрация</a></li>
+                    {% endif %}
+                </ul>
+                {% include 'app/loginpartial.html' %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+{% block content %}{% endblock %}
+        <hr/>
+        <footer>
+            <p>&copy; {{ year }} - Моё Django приложение</p>
+        </footer>
+    </div>
+
+    <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'app/scripts/respond.js' %}"></script>
+{% block scripts %}{% endblock %}
+
+</body>
+
+<script>
+    $("#id_name").focus(
+        function () { $("#id_name").css("background-color", "yellow"); }
+    );
+    $("#id_name").blur(
+        function () { $("#id_name").css("background-color", "white"); }
+    );
+
+    $("#id_city").focus(
+        function () { $("#id_city").css("background-color", "yellow"); }
+    );
+    $("#id_city").blur(
+        function () { $("#id_city").css("background-color", "white"); }
+    );
+
+    $("#id_job").focus(
+        function () { $("#id_job").css("background-color", "yellow"); }
+    );
+    $("#id_job").blur(
+        function () { $("#id_job").css("background-color", "white"); }
+    );
+
+    $("#id_email").focus(
+        function () { $("#id_email").css("background-color", "yellow"); }
+    );
+    $("#id_email").blur(
+        function () { $("#id_email").css("background-color", "white"); }
+    );
+
+    $("#id_message").focus(
+        function () { $("#id_message").css("background-color", "yellow"); }
+    );
+    $("#id_message").blur(
+        function () { $("#id_message").css("background-color", "white"); }
+    );
+
+    $("#id_button").mouseover(
+        function () { $("#id_button").css("color", "yellow"); }
+    );
+    $("#id_button").mouseout(
+        function () { $("#id_button").css("color", "black"); }
+    );
+</script>
+</html>
